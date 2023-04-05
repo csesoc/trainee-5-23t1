@@ -1,4 +1,4 @@
-import { RestaurantEleType, RestaurantStorageType} from '../constants/defaults';
+import { RestaurantEleType, RestaurantStorageType} from './defaults';
 
 export const STORAGE_KEY = 'restaurants';
 
