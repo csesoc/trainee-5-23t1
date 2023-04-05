@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import { storage } from './utils/storage.ts';
 
 function App() {
+  // initialise storage area for restaurants
   return (
     <div className="App">
       <header className="App-header">

@@ -1,30 +1,66 @@
-import { restaurantDefault } from '../constants/defaults';
+import { RestaurantEleType, RestaurantStorageType} from '../constants/defaults';
 
-const STORAGE_KEY = 'data';
+export const STORAGE_KEY = 'restaurants';
 
-const storage = {
-  get: (key: string): any => {
-    const data: Record<string, any> = storage.load();
+export const storage = {
+  getRestaurant: (name: string): RestaurantStorageType | null => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
 
-    if (key in data) {
-      return data[key];
-    }
-    if (key in defaults) {
-      storage.set(key, defaults[key]);
-      return defaults[key];
+    if (name in data) {
+      return data[name];
     }
 
     return null;
   },
 
-  set: (key: string, value: any) => {
-    const data: Record<string, any> = storage.load();
-    data[key] = value;
+  addNewRes: (restaurant: RestaurantStorageType) => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
+    data[restaurant.name] = restaurant;
     storage.save(data);
   },
 
-  load: (): Record<string, any> => {
-    let data: Record<string, any> = {};
+  setResValue: (restaurant: string, key: string, value: any) => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
+    if (key in data[restaurant]) {
+      data[restaurant][key] = value;
+    }
+    storage.save(data);
+  },
+
+  addTag: (restaurant: string, key: string, tag: string) => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
+    
+    if (key == 'other') {
+      data[restaurant].tags.other.push(tag);
+    } else {
+      data[restaurant].tags[key] = tag;
+    }
+
+    storage.save(data);
+  },
+
+  removeTag: (restaurant: string, tag: string) => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
+    const tagsArray: Array<string> = data[restaurant].tags.other;
+    
+    const index = tagsArray.indexOf(tag);
+    if (index > -1) {
+      tagsArray.splice(index, 1);
+    }
+
+    storage.save(data);
+  },
+
+  // NOTE; how tf do we know which one to remove when we want to remove it
+  addElement: (restaurant: string, type: string, content: string) => {
+    const data: Record<string, RestaurantStorageType> = storage.load();
+    const newEle: RestaurantEleType = {}
+    newEle[type] = content;
+    data[restaurant].elements.push(newEle);
+  },
+
+  load: (): Record<string, RestaurantStorageType> => {
+    let data: Record<string, RestaurantStorageType> = {};
 
     if (localStorage[STORAGE_KEY]) {
       data = JSON.parse(localStorage[STORAGE_KEY]);
@@ -35,7 +71,7 @@ const storage = {
     return data;
   },
 
-  save: (data: Record<string, any>) => {
+  save: (data: Record<string, RestaurantStorageType>) => {
     localStorage[STORAGE_KEY] = JSON.stringify(data);
   },
 };
