@@ -1,3 +1,5 @@
+import { restaurantDefault } from '../constants/defaults';
+
 const STORAGE_KEY = 'data';
 
 const storage = {
@@ -6,6 +8,10 @@ const storage = {
 
     if (key in data) {
       return data[key];
+    }
+    if (key in defaults) {
+      storage.set(key, defaults[key]);
+      return defaults[key];
     }
 
     return null;
@@ -33,7 +39,4 @@ const storage = {
     localStorage[STORAGE_KEY] = JSON.stringify(data);
   },
 };
-
 storage.load();
-
-export default storage;
