@@ -51,7 +51,6 @@ export const storage = {
     storage.save(data);
   },
 
-  // NOTE; how tf do we know which one to remove when we want to remove it
   addElement: (restaurant: string, type: string, content: string) => {
     const data: Record<string, RestaurantStorageType> = storage.load();
     const newEle: RestaurantEleType = {}
