@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import RestaurantCard from "./components/RestaurantCard";
+import Stack from '@mui/joy/Stack';
 
 function App() {
   return (
@@ -20,9 +21,10 @@ function App() {
         </a>
       </header>
       {/* scroll down to see the restaurant card example: */}
-      <RestaurantCard>
-      </RestaurantCard>
-
+      <Stack direction="row" spacing={2}>
+        <RestaurantCard></RestaurantCard>
+        <RestaurantCard></RestaurantCard>
+      </Stack>
     </div>
   );
 }
