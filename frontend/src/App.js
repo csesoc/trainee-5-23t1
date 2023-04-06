@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import RestaurantCard from "./components/RestaurantCard";
 
 function App() {
   return (
@@ -18,6 +19,10 @@ function App() {
           Learn React
         </a>
       </header>
+      {/* scroll down to see the restaurant card example: */}
+      <RestaurantCard>
+      </RestaurantCard>
+
     </div>
   );
 }

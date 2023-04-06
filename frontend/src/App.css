@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+/* added star rating */
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.on {
+  color: #000;
+}
+.off {
+  color: #ccc;
+}
