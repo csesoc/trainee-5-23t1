@@ -1,30 +1,41 @@
-import logo from './logo.svg';
 import './App.css';
 import RestaurantCard from "./components/RestaurantCard";
-import Stack from '@mui/joy/Stack';
+import { Grid } from '@mui/joy';
+
+// padding for left and right of grid
 
 function App() {
+  // const mystyle = {
+  //   padding: "20px",
+  // };
   return (
-    <div className="App">
-      {/* scroll down to see the restaurant card example: */}
-      {/* note a maximum of 4 cards per stack, excluding any border requirements */}
-      
-      <Stack direction="row" justifyContent="center" spacing={2}>
+    <div className="design" style={{ paddingLeft: 10, paddingRight: 10,marginLeft: 15, marginRight: 100}}>
+      <Grid container spacing={10}>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
-      </Stack>
-      {/* can't find a way to have spacing between rows w/o using <br></br> */}
-      <br></br> 
-      <Stack direction="row" justifyContent="center" spacing={2}>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
+        </Grid>
+        <Grid item xs={12} sm={6} md={3}>
         <RestaurantCard></RestaurantCard>
-      </Stack>
-
-
+        </Grid>
+      </Grid>
     </div>
   );
 }

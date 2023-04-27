@@ -50,3 +50,11 @@ button {
 .off {
   color: #ccc;
 }
+
+.design {
+  /* display: grid; */
+  padding-left: 100px;
+  padding-right: 100px;
+  margin: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
