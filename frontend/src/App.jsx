@@ -2,11 +2,11 @@ import "./App.css";
 
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CssVarsProvider, ThemeProvider } from "@mui/joy";
+import { CssVarsProvider } from "@mui/joy";
 import CssBaseline from "@mui/joy/CssBaseline";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
-import { appTheme } from "./themes";
+import Navbar from "./components/Navbar";
 
 function App() {
   // initialise storage area for restaurants
@@ -14,12 +14,11 @@ function App() {
     <CssVarsProvider>
       <CssBaseline></CssBaseline>
       <BrowserRouter>
-        <ThemeProvider theme={appTheme}>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/restaurant" element={<RestaurantPage />} />
-          </Routes>
-        </ThemeProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/restaurant" element={<RestaurantPage />} />
+        </Routes>
       </BrowserRouter>
     </CssVarsProvider>
   );
