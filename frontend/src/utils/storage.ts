@@ -30,7 +30,7 @@ export const storage = {
   addTag: (restaurant: string, key: string, tag: string) => {
     const data: Record<string, RestaurantStorageType> = storage.load();
     
-    if (key == 'other') {
+    if (key === 'other') {
       data[restaurant].tags.other.push(tag);
     } else {
       data[restaurant].tags[key] = tag;
