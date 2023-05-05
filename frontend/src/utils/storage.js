@@ -72,4 +72,5 @@ export const storage = {
     localStorage[STORAGE_KEY] = JSON.stringify(data);
   },
 };
+
 storage.load();
