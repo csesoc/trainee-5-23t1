@@ -1,6 +1,6 @@
 import { Typography } from "@mui/joy";
 import * as React from "react";
-import { FlexBox } from "../utils/generalStyles";
+import { FlexBox, fontColour } from "../utils/generalStyles";
 import { useMediaQuery } from "react-responsive";
 
 export const RestaurantDescriptionTag = ({ tag, description }) => {
@@ -13,10 +13,12 @@ export const RestaurantDescriptionTag = ({ tag, description }) => {
         justifyContent: `${isMobile ? "space-between" : ""}`,
       }}
     >
-      <Typography fontWeight="bold" fontSize="22px">
+      <Typography fontWeight="bold" fontSize="22px" textColor={fontColour}>
         {tag}:&nbsp;&nbsp;
       </Typography>
-      <Typography fontSize="22px">{description ?? ""}</Typography>
+      <Typography fontSize="22px" textColor={fontColour}>
+        {description ?? ""}
+      </Typography>
     </FlexBox>
   );
 };

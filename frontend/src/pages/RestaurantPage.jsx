@@ -44,6 +44,7 @@ const RestaurantPage = () => {
   return (
     <Box>
       <FlexBox
+        id="banner"
         sx={{ alignItems: "center" }}
         height={DEFAULT_BANNER_HEIGHT}
         bgcolor="grey"
