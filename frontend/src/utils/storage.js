@@ -3,11 +3,9 @@ export const STORAGE_KEY = "restaurants";
 export const storage = {
   getRestaurant: (name) => {
     const data = storage.load();
-
     if (name in data) {
       return data[name];
     }
-
     return null;
   },
 

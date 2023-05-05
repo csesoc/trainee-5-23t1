@@ -5,12 +5,14 @@ import { storage } from "../utils/storage";
 import { Box, Typography } from "@mui/joy";
 import { centerInDivStyle, primaryLight } from "../utils/generalStyles";
 import { NAVBAR_HEIGHT } from "../components/Navbar";
+import { useMediaQuery } from "react-responsive";
 
 const DEFAULT_BANNER_HEIGHT = "27vh";
 
 const RestaurantPage = () => {
   const navigate = useNavigate();
   const { resName } = useParams();
+  const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
 
   const [resData, setResData] = useState({});
   const [resTitle, setResTitle] = useState("");
@@ -24,12 +26,15 @@ const RestaurantPage = () => {
       navigate("/");
       return;
     }
-    // convert title
-    const title = Array.from(resData.name.split("_"))
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
 
-    setResTitle(title);
+    if (Object.keys(resData).length !== 0) {
+      // convert title
+      const title = Array.from(resData.name.split("_"))
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
+
+      setResTitle(title);
+    }
   }, [resData, navigate]);
 
   return (
@@ -48,7 +53,7 @@ const RestaurantPage = () => {
       <Box
         bgcolor={primaryLight}
         height="100%"
-        width="85%"
+        width={isMobile ? "100%" : "85%"}
         p="0 40px"
         m="0 auto"
         minHeight={`calc(100vh - ${DEFAULT_BANNER_HEIGHT} - ${NAVBAR_HEIGHT})`}
