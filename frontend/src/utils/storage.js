@@ -1,5 +1,21 @@
 export const STORAGE_KEY = "restaurants";
 
+export const restaurantDefault = {
+  name: "",
+  image: "",
+  location: "",
+  embed: "",
+  priceRange: "",
+  rating: 0,
+  tags: {
+    suburb: "",
+    cuisine: "",
+    other: [],
+  },
+  descriptions: "",
+  elements: [],
+};
+
 export const storage = {
   getRestaurant: (name) => {
     const data = storage.load();
