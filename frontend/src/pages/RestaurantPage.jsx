@@ -3,19 +3,32 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { storage } from "../utils/storage";
 import { Box, Typography } from "@mui/joy";
-import { centerInDivStyle, primaryLight } from "../utils/generalStyles";
+import { FlexBox, primaryLight } from "../utils/generalStyles";
 import { NAVBAR_HEIGHT } from "../components/Navbar";
 import { useMediaQuery } from "react-responsive";
+import RestaurantDescriptionTag from "../components/RestaurantDescriptionTag";
 
-const DEFAULT_BANNER_HEIGHT = "27vh";
+export const DEFAULT_BANNER_HEIGHT = "27vh";
+export const TIKTOK_VIDEO_WIDTH = "320px";
 
 const RestaurantPage = () => {
   const navigate = useNavigate();
   const { resName } = useParams();
-  const isMobile = useMediaQuery({ query: "(max-width: 550px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
+  const isTablet = useMediaQuery({ query: "(max-width: 950px)" });
 
   const [resData, setResData] = useState({});
   const [resTitle, setResTitle] = useState("");
+
+  useEffect(() => {
+    const resizeEmbed = () => {};
+
+    window.addEventListener("resize", resizeEmbed);
+    // clean up function
+    return () => {
+      window.removeEventListener("resize", resizeEmbed);
+    };
+  }, []);
 
   useEffect(() => {
     setResData(storage.getRestaurant(resName));
@@ -39,8 +52,8 @@ const RestaurantPage = () => {
 
   return (
     <Box>
-      <Box
-        sx={{ display: "flex", alignItems: "center" }}
+      <FlexBox
+        sx={{ alignItems: "center" }}
         height={DEFAULT_BANNER_HEIGHT}
         bgcolor="grey"
       >
@@ -49,16 +62,45 @@ const RestaurantPage = () => {
             {resTitle}
           </Typography>
         </Box>
-      </Box>
+      </FlexBox>
       <Box
         bgcolor={primaryLight}
         height="100%"
-        width={isMobile ? "100%" : "85%"}
-        p="0 40px"
+        width={isTablet ? "100%" : "85%"}
+        p="40px"
         m="0 auto"
         minHeight={`calc(100vh - ${DEFAULT_BANNER_HEIGHT} - ${NAVBAR_HEIGHT})`}
       >
-        <Box sx={centerInDivStyle}>a</Box>
+        <Box
+          width={`${isMobile ? TIKTOK_VIDEO_WIDTH : "100%"}`}
+          m={`${isMobile ? "0 auto" : ""}`}
+        >
+          <FlexBox
+            sx={{
+              flexDirection: `${isMobile ? "column" : "row"}`,
+              justifyContent: `${isMobile ? "" : "space-evenly"}`,
+            }}
+          >
+            <RestaurantDescriptionTag
+              tag="Cuisine"
+              description={resData.tags.cuisine ?? " "}
+            />
+            <iframe
+              style={{
+                overflow: "hidden",
+                border: "none",
+                height: "575px",
+                borderRadius: "5px",
+                width: TIKTOK_VIDEO_WIDTH,
+              }}
+              scrolling="no"
+              muted
+              src={resData.embed}
+              title="Video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            ></iframe>
+          </FlexBox>
+        </Box>
       </Box>
     </Box>
   );
