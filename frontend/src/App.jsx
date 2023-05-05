@@ -2,16 +2,16 @@ import "./App.css";
 
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { CssVarsProvider } from "@mui/joy";
+import { Box, CssVarsProvider } from "@mui/joy";
 import CssBaseline from "@mui/joy/CssBaseline";
 import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
-import Navbar from "./components/Navbar";
+import Navbar, { NAVBAR_HEIGHT } from "./components/Navbar";
 import { storage } from "./utils/storage";
 
 // pseudo test restaurant info
 const dummyData = {
-  name: "Spice Alley",
+  name: "spice_alley",
   image: "",
   location: "Sydney Kensington",
   embed: "https://www.tiktok.com/embed/7165992284994014466",
@@ -37,6 +37,7 @@ function App() {
       <CssBaseline></CssBaseline>
       <BrowserRouter>
         <Navbar />
+        <Box sx={{ height: NAVBAR_HEIGHT }}></Box>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/restaurant/:resName" element={<RestaurantPage />} />
