@@ -4,7 +4,7 @@ import { hoverStyle, primaryMain } from "../utils/generalStyles";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 
-export const NAVBAR_HEIGHT = "60px";
+export const NAVBAR_HEIGHT = "55px";
 
 const navbarStyle = {
   height: NAVBAR_HEIGHT,
