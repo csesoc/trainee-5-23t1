@@ -79,12 +79,69 @@ const RestaurantPage = () => {
             sx={{
               flexDirection: `${isMobile ? "column" : "row"}`,
               justifyContent: `${isMobile ? "" : "space-evenly"}`,
+              gap: "15px",
             }}
           >
-            <RestaurantDescriptionTag
-              tag="Cuisine"
-              description={resData.tags.cuisine ?? " "}
-            />
+            <Box>
+              <RestaurantDescriptionTag
+                tag="Cuisine"
+                description={resData.tags.cuisine}
+              />
+
+              <RestaurantDescriptionTag
+                tag="Location"
+                description={resData.location}
+              />
+
+              <RestaurantDescriptionTag
+                tag="Price"
+                description={resData.priceRange}
+              />
+
+              <RestaurantDescriptionTag
+                tag="Google Rating"
+                description={"3/5"}
+              />
+
+              <FlexBox gap="10px" marginTop="10px" flexWrap="wrap">
+                <Typography
+                  sx={{
+                    bgcolor: "#AAAAAA80",
+                    borderRadius: "15px",
+                    border: "1px solid #AAA",
+                    p: "0 15px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {resData.tags.cuisine}
+                </Typography>
+                <Typography
+                  sx={{
+                    bgcolor: "#AAAAAA80",
+                    borderRadius: "15px",
+                    border: "1px solid #AAA",
+                    p: "0 15px",
+                    whiteSpace: "nowrap",
+                  }}
+                >
+                  {resData.tags.suburb}
+                </Typography>
+                {Array.from(resData.tags.other).map((tag) => (
+                  <Typography
+                    sx={{
+                      bgcolor: "#AAAAAA80",
+                      borderRadius: "15px",
+                      border: "1px solid #AAA",
+                      p: "0 15px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {tag}
+                  </Typography>
+                ))}
+              </FlexBox>
+            </Box>
+
             <iframe
               style={{
                 overflow: "hidden",

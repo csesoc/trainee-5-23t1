@@ -16,7 +16,7 @@ export const RestaurantDescriptionTag = ({ tag, description }) => {
       <Typography fontWeight="bold" fontSize="22px">
         {tag}:&nbsp;&nbsp;
       </Typography>
-      <Typography fontSize="22px">{description}</Typography>
+      <Typography fontSize="22px">{description ?? ""}</Typography>
     </FlexBox>
   );
 };
