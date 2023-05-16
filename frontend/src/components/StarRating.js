@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// code taken from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6 ;;
+// code taken from https://dev.to/michaelburrows/create-a-custom-react-star-rating-component-5o6
 const StarRating = () => {
     const [rating, setRating] = useState(0);
     const [hover, setHover] = useState(0);
