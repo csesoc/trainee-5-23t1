@@ -11,7 +11,7 @@ import StarRating from "./StarRating.js";
 export default function RestaurantCard() {
   return (
     // a Constant width is required, make sure contents inside aren't stretched out
-    <Card variant="outlined" sx={{ width: 330 }}>
+    <Card variant="outlined" sx={{ width: 350 }}>
       <CardOverflow>
         <AspectRatio ratio="2">
           <img
@@ -43,7 +43,7 @@ export default function RestaurantCard() {
           size="sm"
           sx={{ pointerEvents: 'none' }}
         >
-          Tag 1
+          strthfld
         </Chip>
 
         <Chip
@@ -52,7 +52,7 @@ export default function RestaurantCard() {
           size="sm"
           sx={{ pointerEvents: 'none' }}
         >
-          Tag 2
+          jpn
         </Chip>
 
         <Chip
@@ -61,12 +61,13 @@ export default function RestaurantCard() {
           size="sm"
           sx={{ pointerEvents: 'none' }}
         >
-          Tag 3
+          $$
         </Chip>
 
         
         <Divider orientation="vertical" />
-        <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary' }}>
+        
+        <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary', width: 1 }}>
           <div className="App">
             < StarRating />
           </div>

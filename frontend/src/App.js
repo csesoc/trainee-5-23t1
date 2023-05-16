@@ -1,38 +1,32 @@
 import './App.css';
-import RestaurantCard from "./components/RestaurantCard";
+import RestaurantCard from "./components/restaurantCard";
 import { Grid } from '@mui/joy';
 
-// padding for left and right of grid
+// comments:
+// structured so that three cards fit per row
+// spacing between cards at max window screen has issues
 
 function App() {
-  // const mystyle = {
-  //   padding: "20px",
-  // };
   return (
-    <div className="design" style={{ paddingLeft: 10, paddingRight: 10,marginLeft: 15, marginRight: 100}}>
-      <Grid container spacing={10}>
-        <Grid item xs={12} sm={6} md={3}>
+    <div className="design" style={{ paddingLeft: 10, paddingRight: 10, marginLeft: 15, marginRight: 10}}>
+      <Grid container spacing={2}>
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        {/* three per row at max window size */}
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-        <RestaurantCard></RestaurantCard>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-        <RestaurantCard></RestaurantCard>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
+        <Grid item xs={8} sm={6} md={4}>
         <RestaurantCard></RestaurantCard>
         </Grid>
       </Grid>
