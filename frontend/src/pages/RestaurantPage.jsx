@@ -199,13 +199,12 @@ const RestaurantPage = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             ></iframe>
           </FlexBox>
-
+          <Box height="80px"></Box>
           <Box
             bgcolor={primaryLight}
-            marginTop="50px"
-            marginBottom="20px"
-            marginLeft={isMobile ? "-40px" : "-90px"}
-            width="60%"
+            position="absolute"
+            left="0"
+            width="50%"
             borderRadius="0 20px 20px 0"
           >
             <Typography
@@ -216,7 +215,8 @@ const RestaurantPage = () => {
               Notes
             </Typography>
           </Box>
-          <FlexBox sx={{ flexDirection: "column" }}>
+
+          <FlexBox sx={{ flexDirection: "column", marginTop: "100px" }}>
             {Array.from(resData.elements).map((element, index) =>
               getElement(element, index)
             )}
