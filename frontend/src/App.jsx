@@ -8,28 +8,11 @@ import HomePage from "./pages/HomePage";
 import RestaurantPage from "./pages/RestaurantPage";
 import Navbar, { NAVBAR_HEIGHT } from "./components/Navbar";
 import { storage } from "./utils/storage";
-
-// pseudo test restaurant info
-const dummyData = {
-  name: "spice_alley",
-  image: "",
-  location: "Sydney Kensington",
-  embed: "https://www.tiktok.com/embed/7165992284994014466",
-  priceRange: "$",
-  rating: 0,
-  tags: {
-    suburb: "Kensington",
-    cuisine: "Asian",
-    other: ["Xiao long bai", "Wontons", "Thai"],
-  },
-  descriptions:
-    "The fresh, nourishing and delicious food you’ve come to love from Spice Alley is available from 11am daily (kitchens close 9:30pm Sunday to Thursday, and 10pm on Friday & Saturday). For takeaway, order online or by phone and pick up from Kensington Street.",
-  elements: [],
-};
+import { pseudoData } from "./utils/pseudo_restaurant_data";
 
 function App() {
   /* to be removed */
-  if (Object.keys(storage.load()).length === 0) storage.addNewRes(dummyData);
+  if (Object.keys(storage.load()).length === 0) storage.addNewRes(pseudoData);
 
   // initialise storage area for restaurants
   return (

@@ -14,6 +14,7 @@ const navbarStyle = {
   bgcolor: primaryMain,
   alignItems: "center",
   padding: "0 20px",
+  zIndex: "3",
 };
 
 const Navbar = () => {
