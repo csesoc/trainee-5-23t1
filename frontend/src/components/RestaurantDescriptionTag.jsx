@@ -1,6 +1,7 @@
 import { Typography } from "@mui/joy";
 import * as React from "react";
 import { FlexBox, fontColour } from "../utils/generalStyles";
+import { Rating } from "react-simple-star-rating";
 import { useMediaQuery } from "react-responsive";
 
 export const RestaurantDescriptionTag = ({ tag, description }) => {
@@ -16,9 +17,13 @@ export const RestaurantDescriptionTag = ({ tag, description }) => {
       <Typography fontWeight="bold" fontSize="22px" textColor={fontColour}>
         {tag}:&nbsp;&nbsp;
       </Typography>
-      <Typography fontSize="22px" textColor={fontColour}>
-        {description ?? ""}
-      </Typography>
+      {tag === "Google Rating" ? (
+        <Rating initialValue={description} readonly fillColor="#fdd835" />
+      ) : (
+        <Typography fontSize="22px" textColor={fontColour}>
+          {description ?? ""}
+        </Typography>
+      )}
     </FlexBox>
   );
 };

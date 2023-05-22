@@ -6,7 +6,7 @@ export const pseudoData = {
   location: "Sydney Kensington",
   embed: "https://www.tiktok.com/embed/7165992284994014466",
   priceRange: "$",
-  rating: 0,
+  rating: 3.5,
   tags: {
     suburb: "Kensington",
     cuisine: "Asian",

@@ -8,7 +8,7 @@ import {
   Hoverable,
   fontColour,
   primaryLight,
-  primaryMain,
+  primaryLighter,
 } from "../utils/generalStyles";
 import { NAVBAR_HEIGHT } from "../components/Navbar";
 import { useMediaQuery } from "react-responsive";
@@ -35,7 +35,7 @@ const RestaurantPage = () => {
 
     if (key === "text") {
       return (
-        <Typography level="p" fontSize="20px" key={i}>
+        <Typography level="p" fontSize="20px" key={i} textColor={fontColour}>
           {value}
         </Typography>
       );
@@ -111,7 +111,7 @@ const RestaurantPage = () => {
       </FlexBox>
 
       <FlexBox
-        bgcolor={primaryLight}
+        bgcolor={primaryLighter}
         height="100%"
         width={isTablet ? "100%" : "85%"}
         p="40px"
@@ -161,7 +161,7 @@ const RestaurantPage = () => {
               />
               <RestaurantDescriptionTag
                 tag="Google Rating"
-                description={"3/5"}
+                description={resData.rating}
               />
 
               <FlexBox gap="10px" marginTop="10px" flexWrap="wrap">
@@ -201,7 +201,7 @@ const RestaurantPage = () => {
           </FlexBox>
 
           <Box
-            bgcolor={primaryMain}
+            bgcolor={primaryLight}
             marginTop="50px"
             marginBottom="20px"
             marginLeft={isMobile ? "-40px" : "-90px"}
