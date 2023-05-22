@@ -84,9 +84,16 @@ const RestaurantPage = () => {
         position="relative"
       >
         <Box width="85%" m="0 auto">
-          <Typography textColor="white" fontSize="8vh" fontWeight="bold">
-            {resTitle}
-          </Typography>
+          <FlexBox
+            zIndex="1"
+            position="absolute"
+            height="100%"
+            alignItems="center"
+          >
+            <Typography textColor="white" fontSize="8vh" fontWeight="bold">
+              {resTitle}
+            </Typography>
+          </FlexBox>
         </Box>
 
         {resData.image && (
@@ -95,10 +102,9 @@ const RestaurantPage = () => {
             src={resData.image}
             alt="Restaurant Image"
             position="absolute"
-            top="0"
-            left="0"
             height="100%"
             width="100%"
+            zIndex="0"
             sx={{ objectFit: "cover", opacity: "0.6" }}
           />
         )}
