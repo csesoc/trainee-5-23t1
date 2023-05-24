@@ -15,6 +15,7 @@ const navbarStyle = {
   display: "flex",
   alignItems: "center",
   padding: "0 20px",
+    zIndex: 1
 };
 
 const Navbar = () => {

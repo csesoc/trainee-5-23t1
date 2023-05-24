@@ -8,7 +8,7 @@ import Chip from '@mui/joy/Chip';
 
 import StarRating from "./StarRating.js";
 
-export default function RestaurantCard() {
+const RestaurantCard = ({ img, name, tags }) => {
   return (
     // a Constant width is required, make sure contents inside aren't stretched out
     <Card variant="outlined" sx={{ width: 350 }}>
@@ -16,7 +16,6 @@ export default function RestaurantCard() {
         <AspectRatio ratio="2">
           <img
             src="https://images.unsplash.com/photo-1576854288157-8486dde4f145?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80"
-            srcSet="https://images.unsplash.com/photo-1576854288157-8486dde4f145?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80 2x"
             loading="lazy"
             alt="grey"
           />
@@ -76,3 +75,5 @@ export default function RestaurantCard() {
     </Card>
   );
 }
+
+export default RestaurantCard;
