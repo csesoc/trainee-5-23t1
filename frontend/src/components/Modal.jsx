@@ -7,8 +7,24 @@ import AutoComplete from "./Autocomplete";
 
 const RestaurantModal = ({ open, setOpen }) => {
     const [place, setPlace] = React.useState('');
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         console.log(place);
+        let service;
+
+        const request = {
+            query: place,
+            fields: ["name", "place_id", "formatted_address", "photos", "price_level", "rating", "types"],
+        };
+
+        service = new window.google.maps.places.PlacesService(document.createElement('div'));
+        service.findPlaceFromQuery(request, (results, status) => {
+            if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
+                console.log(results[0]);
+
+            }
+        });
+
+
     }
     return (
         <Modal open={open} onClose={() => setOpen(false)} >
