@@ -1,10 +1,10 @@
-import { Box, Typography } from "@mui/joy";
+import { Typography } from "@mui/joy";
 import * as React from "react";
-import { hoverStyle, primaryMain } from "../utils/generalStyles";
+import { FlexBox, Hoverable, primaryMain } from "../utils/generalStyles";
 import { useNavigate } from "react-router-dom";
 import logo from "../logo.svg";
 
-export const NAVBAR_HEIGHT = "60px";
+export const NAVBAR_HEIGHT = "55px";
 
 const navbarStyle = {
   height: NAVBAR_HEIGHT,
@@ -12,10 +12,9 @@ const navbarStyle = {
   position: "fixed",
   top: "0",
   bgcolor: primaryMain,
-  display: "flex",
   alignItems: "center",
   padding: "0 20px",
-    zIndex: 1
+  zIndex: "3",
 };
 
 const Navbar = () => {
@@ -25,20 +24,19 @@ const Navbar = () => {
   };
 
   return (
-    <Box sx={navbarStyle}>
-      <Box
+    <FlexBox sx={navbarStyle}>
+      <Hoverable
         component="img"
         src={logo}
         alt="Logo"
         width="50px"
         height="50px"
         onClick={homeButtonHandler}
-        sx={hoverStyle}
       />
       <Typography level="h3" textColor="white">
         MyRizztuarants
       </Typography>
-    </Box>
+    </FlexBox>
   );
 };
 
