@@ -4,6 +4,7 @@ import Modal from '@mui/joy/Modal';
 import ModalDialog from '@mui/joy/ModalDialog';
 import Typography from '@mui/joy/Typography';
 import AutoComplete from "./Autocomplete";
+import { storage } from "../utils/storage";
 
 const RestaurantModal = ({ open, setOpen }) => {
     const [place, setPlace] = React.useState('');
@@ -20,7 +21,7 @@ const RestaurantModal = ({ open, setOpen }) => {
         service.findPlaceFromQuery(request, (results, status) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
                 console.log(results[0]);
-
+                // storage.addNewRes()
             }
         });
 
