@@ -3,6 +3,7 @@ import Searchbar from '../components/Searchbar'
 import AddIcon from '@mui/icons-material/Add';
 import {IconButton, Stack} from '@mui/joy';
 import { primaryMain, primaryLight } from "../utils/generalStyles";
+import Grid from '@mui/joy/Grid';
 import RestaurantCard from "../components/restaurantCard";
 import RestaurantModal from "../components/Modal"
 
@@ -14,7 +15,7 @@ const HomePage = () => {
         setOpenNewModal(true);
     }
     return (
-        <Stack mt='60px' direction='column' alignItems='center' spacing={4}>
+        <Stack direction='column' alignItems='center' spacing={4}>
             <RestaurantModal
                 open={openNewModal}
                 setOpen={setOpenNewModal}
@@ -26,24 +27,31 @@ const HomePage = () => {
                     bgcolor: primaryLight,
                     color: primaryMain,
                     borderRadius: '50%',
-                    width: '60px',
-                    height: '60px',
+                    width: '100px',
+                    height: '100px',
                     "&:hover": {
                       bgcolor: primaryLight
-                    }
+                    },
+                    mb: '60px'
                   }}>
-                    <AddIcon sx={{ width: '50px' }}/>
+                    <AddIcon  sx={{ fontSize: 60 }}/>
                 </IconButton>
 
                 <Searchbar/>
             </Stack>
-            <Stack direction='row' flexWrap='wrap' justifyContent='space-evenly' gap={4}>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-                <RestaurantCard/>
-            </Stack>
+                <Grid container spacing={2} sx={{ flexGrow: 1, width: '90%'}}>
+                    <Grid xs={12} md={6} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <RestaurantCard/>
+                    </Grid>
+                    <Grid xs={12} md={6} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <RestaurantCard/>
+                    </Grid>
+                    <Grid xs={12} md={6} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <RestaurantCard/>
+                    </Grid>
+
+                </Grid>
+
       </Stack>
       );
 

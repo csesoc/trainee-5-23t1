@@ -7,7 +7,7 @@ import GooglePlacesAutocomplete from "react-google-places-autocomplete";
 const Searchbar = () => {
 
     return (
-        <Stack width="600px">
+        <Stack width={{ sx: '300px', md: '600px' }}>
             <Input
                 startDecorator={<SearchIcon/>}
                 endDecorator={<ArrowDropDownIcon/>}
