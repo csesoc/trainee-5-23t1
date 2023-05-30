@@ -6,17 +6,20 @@ import Typography from '@mui/joy/Typography';
 import AutoComplete from "./Autocomplete";
 import { restaurantDefault, storage } from "../utils/storage";
 import {Input, Stack} from "@mui/joy";
-import Alert from '@mui/joy/Alert';
-import IconButton from '@mui/joy/IconButton';
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import ReportIcon from '@mui/icons-material/Report';
 
-const RestaurantModal = ({ open, setOpen }) => {
+
+const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
     const [place, setPlace] = React.useState('');
     const [cuisine, setCuisine] = React.useState('');
     const [embed, setEmbed] = React.useState('')
 
-    const handleSubmit = async () => {
+    // Takes an Australian address and returns object with { address, suburb, state, postcode }
+    const getAddressParts = (address) => {
+        const ADDRESS_REGEX = /(?<address>.+), (?<suburb>.+) (?<state>[A-Z]{2,3}) (?<postcode>\d{4}), Australia/;
+        return address.match(ADDRESS_REGEX).groups;
+    }
+
+    const handleSubmit = () => {
         let service;
 
         const request = {
@@ -29,16 +32,36 @@ const RestaurantModal = ({ open, setOpen }) => {
             if (status === window.google.maps.places.PlacesServiceStatus.OK && results) {
                 const restaurant = results[0]
                 const image = restaurant.photos[0].getUrl();
-                let restaurant_data = restaurantDefault;
+                const restaurant_data = restaurantDefault;
                 restaurant_data.name = restaurant.name;
-                restaurant_data.image = image;
+                restaurant_data.image = image ? image : "https://images.unsplash.com/photo-1576854288157-8486dde4f145?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80";
                 restaurant_data.location = restaurant.formatted_address;
                 restaurant_data.rating = restaurant.rating;
-                restaurant_data.tags.suburb = ''
+                restaurant_data.tags.suburb = getAddressParts(restaurant.formatted_address).suburb;
                 restaurant_data.tags.cuisine = cuisine;
+                restaurant_data.priceRange = restaurant.price_level;
+                restaurant_data.embed = embed;
 
-                storage.addNewRes(restaurant_data);
-                console.log('added res')
+
+                const request = {
+                    placeId: restaurant.place_id,
+                    fields: ['url']
+                };
+
+                function callback(place, status) {
+                    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                        console.log(place.url);
+                        restaurant_data.googleMapsUrl = place.url;
+                        storage.addNewRes(restaurant_data);
+                        setLocalChange(!localChange);
+                    }
+                }
+
+                service.getDetails(request, callback);
+                setOpen(false);
+                setPlace('');
+                setCuisine('');
+                setEmbed('');
             }
         })
 
@@ -60,9 +83,9 @@ const RestaurantModal = ({ open, setOpen }) => {
                     </Typography>
                     <Input placeholder='e.g. Korean' value={cuisine} onChange={(e) => setCuisine(e.target.value)}/>
                     <Typography component="h2">
-                        Where did you find this restaurant?
+                        How did you find this restaurant?
                     </Typography>
-                    <Input placeholder='Embed a link! e.g. TikTok' value={embed} onChange={(e) => setEmbed(e.target.value)}/>
+                    <Input placeholder='Embed a link! (e.g. TikTok, Youtube)' value={embed} onChange={(e) => setEmbed(e.target.value)}/>
                     <Button type="submit" onClick={handleSubmit}>Add</Button>
                 </Stack>
             </ModalDialog>

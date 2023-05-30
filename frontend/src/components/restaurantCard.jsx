@@ -5,74 +5,93 @@ import CardOverflow from '@mui/joy/CardOverflow';
 import Divider from '@mui/joy/Divider';
 import Typography from '@mui/joy/Typography';
 import Chip from '@mui/joy/Chip';
+import Stack from '@mui/joy/Stack'
+import { useNavigate } from 'react-router-dom';
 
-import StarRating from "./StarRating.js";
+import Rating from '@mui/material/Rating';
 
-const RestaurantCard = ({ img, name, tags }) => {
-  return (
-    // a Constant width is required, make sure contents inside aren't stretched out
-    <Card variant="outlined" sx={{ width: 350 }}>
-      <CardOverflow>
-        <AspectRatio ratio="2">
-          <img
-            src="https://images.unsplash.com/photo-1576854288157-8486dde4f145?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3087&q=80"
-            loading="lazy"
-            alt="grey"
-          />
-        </AspectRatio>
-      </CardOverflow>
-      <Typography level="h2" sx={{ fontSize: 'md', mt: 2, mb: 2 }}>
-        Insert Restaurant Name Here
-      </Typography>
-      <Divider />
-      <CardOverflow
-        variant="soft"
-        sx={{
-          display: 'flex',
-          gap: 1.5,
-          py: 1.5,
-          px: 'var(--Card-padding)',
-          bgcolor: 'background.level1',
-        }}
-      >
-        {/* using 'chip' for tags */}
-        <Chip
-          variant="outlined"
-          color="primary"
-          size="sm"
-          sx={{ pointerEvents: 'none' }}
+const RestaurantCard = ({ res }) => {
+    const navigate = useNavigate();
+    return (
+        <Card variant="outlined"
+            sx={{
+              width: 350,
+              transition: 'transform .2s',
+              '&:hover': {
+                  transform: 'scale(1.02)',
+                  cursor: 'pointer'
+              }
+            }}
+            onClick={() => navigate('/restaurant/' + res.name)}
         >
-          strthfld
-        </Chip>
+            <CardOverflow>
+                <AspectRatio ratio="2">
+                  <img
+                      src={res.image}
+                      loading="lazy"
+                      alt="grey"
+                  />
+                </AspectRatio>
+            </CardOverflow>
+            <Typography level="h2" sx={{ fontSize: 'md', mt: 2, mb: 2 }}>
+                {res.name}
+          </Typography>
+          <Divider />
+          <CardOverflow
+              variant="soft"
+              sx={{
+                  display: 'flex',
+                  gap: 1.5,
+                  py: 1.5,
+                  px: 'var(--Card-padding)',
+                  bgcolor: 'background.level1',
+              }}
+          >
+              <Stack direction={'row'} justifyContent={'space-between'} width={'100%'}>
+                  <Stack direction={'row'} gap={1}>
+                      <Chip
+                          variant="outlined"
+                          color="primary"
+                          size="sm"
+                          sx={{ pointerEvents: 'none' }}
+                      >
+                          {res.tags.suburb}
+                      </Chip>
 
-        <Chip
-          variant="outlined"
-          color="primary"
-          size="sm"
-          sx={{ pointerEvents: 'none' }}
-        >
-          jpn
-        </Chip>
+                      {res.tags.cuisine === ''
+                          ? <></>
+                          : <Chip
+                              variant="outlined"
+                              color="primary"
+                              size="sm"
+                              sx={{ pointerEvents: 'none' }}
+                          >
+                              {res.tags.cuisine}
+                          </Chip>
+                      }
 
-        <Chip
-          variant="outlined"
-          color="primary"
-          size="sm"
-          sx={{ pointerEvents: 'none' }}
-        >
-          $$
-        </Chip>
 
-        
-        <Divider orientation="vertical" />
-        
-        <Typography level="body3" sx={{ fontWeight: 'md', color: 'text.secondary', width: 1 }}>
-          <div className="App">
-            < StarRating />
-          </div>
-        </Typography>
-      </CardOverflow>
-    </Card>
+                          {res.priceRange
+                              ? <Chip
+                                  variant="outlined"
+                                  color="primary"
+                                  size="sm"
+                                  sx={{ pointerEvents: 'none' }}
+                                >
+                                  {"$".repeat(res.priceRange)}
+                                </Chip>
+                              : <></>
+                          }
+
+                  </Stack>
+
+                  <Stack direction={'row'} gap={1}>
+                      <Divider orientation="vertical" />
+                      <Rating name="half-rating" defaultValue={res.rating} precision={0.5} readOnly size={'small'} />
+                  </Stack>
+              </Stack>
+        </CardOverflow>
+        </Card>
   );
 }
 
