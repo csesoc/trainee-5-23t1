@@ -4,6 +4,7 @@ export const restaurantDefault = {
   name: "",
   image: "",
   location: "",
+  googleMapsUrl: "",
   embed: "",
   priceRange: "",
   rating: 0,
