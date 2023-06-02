@@ -15,7 +15,7 @@ import { useMediaQuery } from "react-responsive";
 import RestaurantDescriptionTag from "../components/RestaurantDescriptionTag";
 import Tag from "../components/Tag";
 import editIcon from "../assets/edit.svg";
-import defaultMap from "../assets/default_map.jpg";
+import Map from "../components/Map";
 
 export const DEFAULT_BANNER_HEIGHT = "27vh";
 export const TIKTOK_VIDEO_WIDTH = "320px";
@@ -173,14 +173,12 @@ const RestaurantPage = () => {
               </FlexBox>
               {/* google maps */}
               <Box
-                component="img"
-                alt="Default map"
-                src={defaultMap}
                 maxHeight="300px"
                 width="100%"
                 marginTop="30px"
                 borderRadius="20px"
               />
+              <Map/>
             </Box>
 
             <iframe

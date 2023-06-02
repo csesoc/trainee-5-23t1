@@ -58,3 +58,7 @@ button {
   margin: 10px;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+
+div.pac-container {
+  z-index: 99999999999 !important
+}
