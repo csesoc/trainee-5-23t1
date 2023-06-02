@@ -16,6 +16,7 @@ import RestaurantDescriptionTag from "../components/RestaurantDescriptionTag";
 import Tag from "../components/Tag";
 import editIcon from "../assets/edit.svg";
 import Map from "../components/Map";
+import EditModal from "../components/EditModal";
 
 export const DEFAULT_BANNER_HEIGHT = "27vh";
 export const TIKTOK_VIDEO_WIDTH = "320px";
@@ -29,6 +30,8 @@ const RestaurantPage = () => {
   const [resData, setResData] = useState(restaurantDefault);
   const [resTitle, setResTitle] = useState("");
 
+  const [openEditModal, setOpenEditModal] = useState(false);
+
   const getElement = (ele, i) => {
     const key = Object.keys(ele)[0];
     const value = ele[key];
@@ -41,17 +44,21 @@ const RestaurantPage = () => {
       );
     } else if (key === "image") {
       return (
-        <Box height="350px" width="350px" m="10px auto">
+        <Box height="350px" width="350px" m="10px auto" key={i}>
           <Box
             component="img"
             src={value}
             alt={`Element ${i}`}
-            objectFit="cover"
+            sx={{ objectFit: "cover" }}
             height="100%"
           />
         </Box>
       );
     }
+  };
+
+  const openEdit = () => {
+    setOpenEditModal(true);
   };
 
   useEffect(() => {
@@ -76,6 +83,12 @@ const RestaurantPage = () => {
 
   return (
     <Box>
+      <EditModal
+        open={openEditModal}
+        setOpen={setOpenEditModal}
+        data={resData}
+        setData={setResData}
+      />
       <FlexBox
         id="banner"
         height={DEFAULT_BANNER_HEIGHT}
@@ -90,7 +103,12 @@ const RestaurantPage = () => {
             height="100%"
             alignItems="center"
           >
-            <Typography textColor="white" fontSize="8vh" fontWeight="bold">
+            <Typography
+              textColor="white"
+              fontSize="8vh"
+              fontWeight="bold"
+              sx={{ lineHeight: "90%" }}
+            >
               {resTitle}
             </Typography>
           </FlexBox>
@@ -129,6 +147,7 @@ const RestaurantPage = () => {
             top: "10px",
             height: "50px",
           }}
+          onClick={openEdit}
         />
 
         <Box
@@ -167,35 +186,45 @@ const RestaurantPage = () => {
               <FlexBox gap="10px" marginTop="10px" flexWrap="wrap">
                 <Tag>{resData.tags.cuisine}</Tag>
                 <Tag>{resData.tags.suburb}</Tag>
-                {Array.from(resData.tags.other).map((tag) => (
-                  <Tag>{tag}</Tag>
+                {Array.from(resData.tags.other).map((tag, i) => (
+                  <Tag key={i}>{tag}</Tag>
                 ))}
               </FlexBox>
-              {/* google maps */}
-              <Box
-                maxHeight="300px"
-                width="100%"
-                marginTop="30px"
-                borderRadius="20px"
-              />
-              <Map />
+
+              {/* commented cos it was causing an error when i reload */}
+              {/* <Map /> */}
             </Box>
 
-            <iframe
-              style={{
-                overflow: "hidden",
-                border: "none",
-                height: "575px",
-                borderRadius: "5px",
-                width: TIKTOK_VIDEO_WIDTH,
-                margin: "0 auto",
-              }}
-              scrolling="no"
-              muted
-              src={resData.embed}
-              title="Video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            ></iframe>
+            {resData.embed ? (
+              <iframe
+                style={{
+                  overflow: "hidden",
+                  border: "none",
+                  maxHeight: "575px",
+                  borderRadius: "5px",
+                  width: TIKTOK_VIDEO_WIDTH,
+                  margin: "0 auto",
+                }}
+                scrolling="no"
+                muted
+                src={resData.embed}
+                title="Video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              />
+            ) : (
+              <FlexBox
+                sx={{
+                  width: TIKTOK_VIDEO_WIDTH,
+                  bgcolor: primaryLight,
+                  borderRadius: "5px",
+                  height: "300px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Typography textColor={fontColour}>Add a video link</Typography>
+              </FlexBox>
+            )}
           </FlexBox>
           <Box height="80px"></Box>
           <Box

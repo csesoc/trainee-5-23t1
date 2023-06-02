@@ -5,7 +5,7 @@ import { IconButton, Stack } from "@mui/joy";
 import { primaryMain, primaryLight } from "../utils/generalStyles";
 import Grid from "@mui/joy/Grid";
 import RestaurantCard from "../components/RestaurantCard";
-import RestaurantModal from "../components/Modal";
+import RestaurantModal from "../components/RestaurantModal";
 import { storage } from "../utils/storage";
 
 const HomePage = () => {

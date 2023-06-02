@@ -69,7 +69,7 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
           if (status === window.google.maps.places.PlacesServiceStatus.OK) {
             console.log(place.url);
             restaurant_data.googleMapsUrl = place.url;
-            storage.addNewRes(restaurant_data);
+            storage.setRes(restaurant_data);
             setLocalChange(!localChange);
           }
         }
