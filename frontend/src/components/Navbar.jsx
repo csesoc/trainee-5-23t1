@@ -15,6 +15,7 @@ const navbarStyle = {
   alignItems: "center",
   padding: "0 20px",
   zIndex: "3",
+    boxShadow: 'sm'
 };
 
 const Navbar = () => {
