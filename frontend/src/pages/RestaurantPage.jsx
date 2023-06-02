@@ -178,7 +178,7 @@ const RestaurantPage = () => {
                 marginTop="30px"
                 borderRadius="20px"
               />
-              <Map/>
+              <Map />
             </Box>
 
             <iframe
