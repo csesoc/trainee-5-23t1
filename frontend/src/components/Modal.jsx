@@ -41,6 +41,8 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
                 restaurant_data.tags.cuisine = cuisine;
                 restaurant_data.priceRange = restaurant.price_level;
                 restaurant_data.embed = embed;
+                restaurant_data.place_id = restaurant.place_id;
+
 
 
                 const request = {

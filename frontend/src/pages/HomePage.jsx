@@ -12,7 +12,9 @@ const HomePage = () => {
     const [openNewModal, setOpenNewModal] = React.useState(false);
     const [restaurants, setRestaurants] = React.useState([])
     const [localChange, setLocalChange] = React.useState(false);
-
+    const [search, setSearch] = React.useState('');
+    const [display, setDisplay] = React.useState([]);
+    // update restaurants to be displayed when local storage is changed
     React.useEffect(() => {
         const data = storage.load();
         let temp = [];
@@ -22,10 +24,27 @@ const HomePage = () => {
         setRestaurants(temp);
     }, [localChange]);
 
+    React.useEffect(() => {
+        // when search is changed loop through all res, and put in display if match name or tag (suburb, cuisine, other)
+        setDisplay([]);
+        if (search === '') {
+            setDisplay(restaurants);
+        } else {
+            for (const res_name of restaurants) {
+                const res = storage.getRestaurant(res_name);
+                if (res_name.toLowerCase().includes(search.toLowerCase()) ||
+                    res.tags.suburb.toLowerCase().includes(search.toLowerCase()) ||
+                    res.tags.cuisine.toLowerCase().includes(search.toLowerCase())) {
+                    setDisplay(display => [...display, res_name]);
+                }
+            }
+        }
+
+    }, [search, restaurants])
+
     const handleAdd = () => {
         setOpenNewModal(true);
     }
-
 
 
     return (
@@ -54,10 +73,10 @@ const HomePage = () => {
                     <AddIcon  sx={{ fontSize: 60 }}/>
                 </IconButton>
 
-                <Searchbar/>
+                <Searchbar search={search} setSearch={setSearch} />
             </Stack>
                 <Grid container spacing={2} sx={{ flexGrow: 1, width: '90%'}}>
-                    {restaurants.map((res) => (
+                    {display.map((res) => (
                         <Grid xs={12} md={6} lg={4} xl={3} sx={{ display: 'flex', justifyContent: 'center' }}>
                             <RestaurantCard res={storage.getRestaurant(res)}/>
                         </Grid>)
