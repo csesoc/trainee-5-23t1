@@ -112,19 +112,19 @@ const EditModal = ({ open, setOpen, data, setData }) => {
     if (key === "text") {
       return (
         <FlexBox key={i} justifyContent="space-between">
-          <Typography level="p" fontSize="20px" sx={{marginRight: "40px"}}>
+          <Typography level="p" fontSize="20px" sx={{ marginRight: "40px" }}>
             {value}
           </Typography>
-        <Box sx={{position: 'absolute', right: "20px"}}>
-          <DeleteButton i={i}  />
-        </Box>
+          <Box sx={{ position: "absolute", right: "20px" }}>
+            <DeleteButton i={i} />
+          </Box>
         </FlexBox>
       );
     } else if (key === "image") {
       return (
         <FlexBox
           height="250px"
-          width="100%"
+          maxWidth="280px"
           m="10px auto"
           justifyContent="center"
           key={i}
@@ -136,9 +136,9 @@ const EditModal = ({ open, setOpen, data, setData }) => {
             height="100%"
             sx={{ objectFit: "cover" }}
           />
-        <Box sx={{position: 'absolute', right: "20px"}}>
-          <DeleteButton i={i}  />
-        </Box>
+          <Box sx={{ position: "absolute", right: "20px" }}>
+            <DeleteButton i={i} />
+          </Box>
         </FlexBox>
       );
     }
@@ -268,7 +268,7 @@ const EditModal = ({ open, setOpen, data, setData }) => {
                   <OrangeButton type="submit">Add</OrangeButton>
                 </>
               ) : (
-                <>
+                <FlexBox justifyContent="center">
                   <IconButton
                     component="label"
                     sx={{
@@ -289,7 +289,7 @@ const EditModal = ({ open, setOpen, data, setData }) => {
                       onChange={handleNotesAddImage}
                     />
                   </IconButton>
-                </>
+                </FlexBox>
               )}
             </Stack>
           </form>
