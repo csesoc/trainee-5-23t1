@@ -251,7 +251,7 @@ const RestaurantPage = () => {
               level="h2"
               sx={{ marginLeft: "45px", p: "15px 0" }}
             >
-              Info
+              Notes
             </Typography>
           </Box>
 
