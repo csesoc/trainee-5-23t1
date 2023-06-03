@@ -16,8 +16,8 @@ export const TextAreaInput = ({ text, setText }) => {
       placeholder="Type in here…"
       value={text}
       onChange={(e) => setText(e.target.value)}
-      minRows={2}
-      maxRows={4}
+      minRows={8}
+      maxRows={20}
       startDecorator={
         <Box sx={{ display: "flex", gap: 0.5 }}>
           <IconButton

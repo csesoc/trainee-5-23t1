@@ -7,6 +7,7 @@ import {
   Box,
   IconButton,
   Button,
+  ModalOverflow,
 } from "@mui/joy";
 import React, { useEffect, useState } from "react";
 import {
@@ -111,10 +112,12 @@ const EditModal = ({ open, setOpen, data, setData }) => {
     if (key === "text") {
       return (
         <FlexBox key={i} justifyContent="space-between">
-          <Typography level="p" fontSize="20px">
+          <Typography level="p" fontSize="20px" sx={{marginRight: "40px"}}>
             {value}
           </Typography>
-          <DeleteButton i={i} />
+        <Box sx={{position: 'absolute', right: "20px"}}>
+          <DeleteButton i={i}  />
+        </Box>
         </FlexBox>
       );
     } else if (key === "image") {
@@ -123,7 +126,7 @@ const EditModal = ({ open, setOpen, data, setData }) => {
           height="250px"
           width="100%"
           m="10px auto"
-          justifyContent="space-between"
+          justifyContent="center"
           key={i}
         >
           <Box
@@ -133,7 +136,9 @@ const EditModal = ({ open, setOpen, data, setData }) => {
             height="100%"
             sx={{ objectFit: "cover" }}
           />
-          <DeleteButton i={i} />
+        <Box sx={{position: 'absolute', right: "20px"}}>
+          <DeleteButton i={i}  />
+        </Box>
         </FlexBox>
       );
     }
@@ -238,7 +243,7 @@ const EditModal = ({ open, setOpen, data, setData }) => {
       </Modal>
 
       <Modal open={openNotesModal} onClose={() => setOpenNotesModal(false)}>
-        <ModalDialog>
+        <ModalDialog sx={{ minWidth: "40%" }}>
           <form onSubmit={handleNotesAddText}>
             <Stack gap="10px">
               <FlexBox justifyContent="center" gap="10px">
@@ -292,78 +297,80 @@ const EditModal = ({ open, setOpen, data, setData }) => {
       </Modal>
 
       <Modal open={open} onClose={handleEditClose}>
-        <ModalDialog sx={{ width: "100%", maxWidth: "400px" }}>
-          <form onSubmit={handleSubmit}>
-            <Stack gap={2}>
-              <FlexBox justifyContent="space-between" alignItems="center">
-                <Typography component="h2">Cuisine</Typography>
-                <Input
-                  placeholder="e.g. Korean"
-                  value={cuisine}
-                  onChange={(e) => setCuisine(e.target.value)}
-                  sx={{ width: "250px" }}
-                />
-              </FlexBox>
+        <ModalOverflow>
+          <ModalDialog sx={{ width: "100%", maxWidth: "30%" }}>
+            <form onSubmit={handleSubmit}>
+              <Stack gap={2}>
+                <FlexBox justifyContent="space-between" alignItems="center">
+                  <Typography component="h2">Cuisine</Typography>
+                  <Input
+                    placeholder="e.g. Korean"
+                    value={cuisine}
+                    onChange={(e) => setCuisine(e.target.value)}
+                    sx={{ width: "250px" }}
+                  />
+                </FlexBox>
 
-              <FlexBox justifyContent="space-between" alignItems="center">
-                <Typography component="h2">Place</Typography>
-                <Input
-                  placeholder="e.g. Town Hall"
-                  value={suburb}
-                  onChange={(e) => setSuburb(e.target.value)}
-                  sx={{ width: "250px" }}
-                />
-              </FlexBox>
+                <FlexBox justifyContent="space-between" alignItems="center">
+                  <Typography component="h2">Place</Typography>
+                  <Input
+                    placeholder="e.g. Town Hall"
+                    value={suburb}
+                    onChange={(e) => setSuburb(e.target.value)}
+                    sx={{ width: "250px" }}
+                  />
+                </FlexBox>
 
-              <FlexBox justifyContent="space-between" alignItems="center">
-                <Typography component="h2">Video Link</Typography>
-                <Input
-                  placeholder="Embed a link! (e.g. TikTok, Youtube)"
-                  value={embed}
-                  onChange={(e) => setEmbed(e.target.value)}
-                  sx={{ width: "250px" }}
-                />
-              </FlexBox>
+                <FlexBox justifyContent="space-between" alignItems="center">
+                  <Typography component="h2">Video Link</Typography>
+                  <Input
+                    placeholder="Embed a link! (e.g. TikTok, Youtube)"
+                    value={embed}
+                    onChange={(e) => setEmbed(e.target.value)}
+                    sx={{ width: "250px" }}
+                  />
+                </FlexBox>
 
-              <FlexBox alignItems="center">
-                <Typography component="h2" sx={{ marginRight: "10px" }}>
-                  Other Tags
-                </Typography>
-                <Typography fontSize="12px">
-                  (click on a tag to delete)
-                </Typography>
-              </FlexBox>
-              <FlexBox
-                alignItems="center"
-                gap="10px"
-                sx={{ flexFlow: "row wrap" }}
-              >
-                {otherTags.map((tag, i) => (
-                  <Hoverable onClick={() => handleDeleteTag(i)} key={i}>
-                    <Tag>{tag}</Tag>
-                  </Hoverable>
-                ))}
+                <FlexBox alignItems="center">
+                  <Typography component="h2" sx={{ marginRight: "10px" }}>
+                    Other Tags
+                  </Typography>
+                  <Typography fontSize="12px">
+                    (click on a tag to delete)
+                  </Typography>
+                </FlexBox>
+                <FlexBox
+                  alignItems="center"
+                  gap="10px"
+                  sx={{ flexFlow: "row wrap" }}
+                >
+                  {otherTags.map((tag, i) => (
+                    <Hoverable onClick={() => handleDeleteTag(i)} key={i}>
+                      <Tag>{tag}</Tag>
+                    </Hoverable>
+                  ))}
+                  <IconButton
+                    sx={orangeIconStyle}
+                    onClick={() => setOpenTagModal(true)}
+                  >
+                    <AddCircleOutlineRoundedIcon sx={{ color: primaryMain }} />
+                  </IconButton>
+                </FlexBox>
+
+                <Typography component="h2">Notes</Typography>
+                {elements.map((element, i) => getElement(element, i))}
                 <IconButton
                   sx={orangeIconStyle}
-                  onClick={() => setOpenTagModal(true)}
+                  onClick={() => setOpenNotesModal(true)}
                 >
                   <AddCircleOutlineRoundedIcon sx={{ color: primaryMain }} />
                 </IconButton>
-              </FlexBox>
 
-              <Typography component="h2">Notes</Typography>
-              {elements.map((element, i) => getElement(element, i))}
-              <IconButton
-                sx={orangeIconStyle}
-                onClick={() => setOpenNotesModal(true)}
-              >
-                <AddCircleOutlineRoundedIcon sx={{ color: primaryMain }} />
-              </IconButton>
-
-              <OrangeButton type="submit">Save</OrangeButton>
-            </Stack>
-          </form>
-        </ModalDialog>
+                <OrangeButton type="submit">Save</OrangeButton>
+              </Stack>
+            </form>
+          </ModalDialog>
+        </ModalOverflow>
       </Modal>
     </>
   );
