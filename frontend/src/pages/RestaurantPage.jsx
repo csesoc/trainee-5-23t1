@@ -18,7 +18,7 @@ import editIcon from "../assets/edit.svg";
 import Map from "../components/Map";
 import EditModal from "../components/EditModal";
 
-export const DEFAULT_BANNER_HEIGHT = "27vh";
+export const DEFAULT_BANNER_HEIGHT = "40vh";
 export const TIKTOK_VIDEO_WIDTH = "320px";
 
 const RestaurantPage = () => {
@@ -102,7 +102,18 @@ const RestaurantPage = () => {
             position="absolute"
             height="100%"
             alignItems="center"
+            flexDirection="column-reverse"
+            paddingBottom="20px"
           >
+            <Typography
+              textColor="white"
+              fontSize="4vh"
+              fontWeight="bold"
+              sx={{ lineHeight: "90%" }}
+            >
+              {resData.location}
+            </Typography>
+            <Box sx={{ margin: "10px" }}></Box>
             <Typography
               textColor="white"
               fontSize="8vh"
@@ -239,7 +250,7 @@ const RestaurantPage = () => {
               level="h2"
               sx={{ marginLeft: "45px", p: "15px 0" }}
             >
-              Notes
+              Info
             </Typography>
           </Box>
 
