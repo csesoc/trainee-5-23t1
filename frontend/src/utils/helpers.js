@@ -15,3 +15,17 @@ export const getBase64 = (file, cb) => {
     console.log("Error: ", error);
   };
 };
+
+export const parseJSON = async (json) => {
+  return new Promise((resolve, reject) => {
+    const readJSON = new FileReader();
+    readJSON.onload = (event) =>
+      resolve(
+        JSON.parse(
+          typeof event.target?.result === "string" ? event.target.result : ""
+        )
+      );
+    readJSON.onerror = (error) => reject(error);
+    readJSON.readAsText(json);
+  });
+};
