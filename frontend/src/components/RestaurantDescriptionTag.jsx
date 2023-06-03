@@ -1,11 +1,28 @@
+import React, { useState, useEffect } from "react";
 import { Typography } from "@mui/joy";
-import * as React from "react";
 import { FlexBox, fontColour } from "../utils/generalStyles";
-import { Rating } from "react-simple-star-rating";
+import Rating from "@mui/material/Rating";
 import { useMediaQuery } from "react-responsive";
 
 export const RestaurantDescriptionTag = ({ tag, description }) => {
   const isMobile = useMediaQuery({ query: "(max-width: 700px)" });
+  const [des, setDes] = useState("");
+
+  useEffect(() => {
+    if (description) {
+      if (tag === "Price") {
+        let priceNum = description;
+        if (typeof priceNum === "string") priceNum = parseInt(description);
+        let priceRating = "";
+        for (let i = 0; i < priceNum; i++) {
+          priceRating += "$";
+        }
+        setDes(priceRating);
+      } else {
+        setDes(description);
+      }
+    }
+  }, [description, tag]);
 
   return (
     <FlexBox
@@ -18,10 +35,15 @@ export const RestaurantDescriptionTag = ({ tag, description }) => {
         {tag}:&nbsp;&nbsp;
       </Typography>
       {tag === "Google Rating" ? (
-        <Rating initialValue={description} readonly fillColor="#fdd835" />
+        <Rating
+          value={parseInt(des)}
+          readOnly
+          precision={0.5}
+          sx={{ marginTop: "6px" }}
+        />
       ) : (
         <Typography fontSize="22px" textColor={fontColour}>
-          {description ?? ""}
+          {des}
         </Typography>
       )}
     </FlexBox>

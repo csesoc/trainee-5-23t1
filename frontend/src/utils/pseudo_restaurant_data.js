@@ -6,7 +6,7 @@ export const pseudoData = {
   location: "Sydney Kensington",
   googleMapsUrl: "https://goo.gl/maps/3qo8cBA8o6GBFUbb7?coh=178571&entry=tt",
   embed: "https://www.tiktok.com/embed/7165992284994014466",
-  priceRange: "$",
+  priceRange: 2,
   rating: 3.5,
   tags: {
     suburb: "Kensington",
