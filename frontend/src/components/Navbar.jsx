@@ -1,4 +1,4 @@
-import { Typography } from "@mui/joy";
+import { Link, Typography } from "@mui/joy";
 import * as React from "react";
 import { FlexBox, Hoverable, primaryMain } from "../utils/generalStyles";
 import { useNavigate } from "react-router-dom";
@@ -34,8 +34,10 @@ const Navbar = () => {
         height="50px"
         onClick={homeButtonHandler}
       />
-      <Typography level="h3" textColor="white">
+      <Typography level="h3" textColor="white" >
+      <Link href="/" underline="none" textColor="white">
         MyRizztuarants
+      </Link>
       </Typography>
     </FlexBox>
   );
