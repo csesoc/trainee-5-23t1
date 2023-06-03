@@ -33,6 +33,7 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
         "price_level",
         "rating",
         "types",
+        "geometry"
       ],
     };
 
@@ -60,6 +61,7 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
         restaurant_data.priceRange = restaurant.price_level;
         restaurant_data.embed = embed;
         restaurant_data.place_id = restaurant.place_id;
+        restaurant_data.geometry = place.geometry;
 
         const request = {
           placeId: restaurant.place_id,
