@@ -77,13 +77,14 @@ const HomePage = () => {
         <Searchbar search={search} setSearch={setSearch} />
       </Stack>
       <Grid container spacing={2} sx={{ flexGrow: 1, width: "90%" }}>
-        {display.map((res) => (
+        {display.map((res, i) => (
           <Grid
             xs={12}
             md={6}
             lg={4}
             xl={3}
             sx={{ display: "flex", justifyContent: "center" }}
+            key={i}
           >
             <RestaurantCard res={storage.getRestaurant(res)} />
           </Grid>

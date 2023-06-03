@@ -202,8 +202,9 @@ const RestaurantPage = () => {
                 ))}
               </FlexBox>
 
-              {/* commented cos it was causing an error when i reload */}
-              {/* <Map /> */}
+              <FlexBox marginTop="10px">
+                <Map place_id={resData.place_id} location={resData.geometry?.location}  />
+              </FlexBox>
             </Box>
 
             {resData.embed ? (

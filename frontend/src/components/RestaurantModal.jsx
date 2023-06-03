@@ -6,6 +6,7 @@ import Typography from "@mui/joy/Typography";
 import AutoComplete from "./Autocomplete";
 import { restaurantDefault, storage } from "../utils/storage";
 import { Input, Stack } from "@mui/joy";
+import { primaryDarker, primaryMain } from "../utils/generalStyles";
 
 const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
   const [place, setPlace] = React.useState("");
@@ -32,6 +33,7 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
         "price_level",
         "rating",
         "types",
+        "geometry"
       ],
     };
 
@@ -59,6 +61,7 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
         restaurant_data.priceRange = restaurant.price_level;
         restaurant_data.embed = embed;
         restaurant_data.place_id = restaurant.place_id;
+        restaurant_data.geometry = place.geometry;
 
         const request = {
           placeId: restaurant.place_id,
@@ -103,7 +106,11 @@ const RestaurantModal = ({ open, setOpen, localChange, setLocalChange }) => {
             value={embed}
             onChange={(e) => setEmbed(e.target.value)}
           />
-          <Button type="submit" onClick={handleSubmit}>
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            sx={{ bgcolor: primaryMain, "&:hover": { bgcolor: primaryDarker } }}
+          >
             Add
           </Button>
         </Stack>
